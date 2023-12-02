@@ -1,4 +1,4 @@
-# morado-frontend
+# morado-backend
 RETO HOTEL ROYAL MANZANARES
 
 ENTIDADES: 
