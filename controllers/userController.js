@@ -12,7 +12,7 @@ async function createUser(req, res) {
       res.status(200).json(userDoc);
     })
     .catch((err) => {
-      console.log(`Creating a new student went wrong! Try again 😞 ${err}`);
+      console.log(`Creating a new user went wrong! Try again 😞 ${err}`);
       res.status(400).json(err);
     });
 }
