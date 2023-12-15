@@ -26,9 +26,9 @@ var users = require("./routes/user");
 app.use("/users/", users);
 
 app.get("/", (req, res) => {
-  res.send("Task API backend");
+  res.send("Creamos usuarios");
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Aplicación escuchando en puerto: ${port}`);
 });
