@@ -1,37 +1,137 @@
 # morado-backend
+
 RETO HOTEL ROYAL MANZANARES
 
-ENTIDADES: 
+ENTIDADES:
 
 GERENTE: crea , modifica o elimina las habitaciones. Tambien gestiona las reservas creadas por los usuarios,
 HABITACIONES: se gestiona el numero de camas, tipo de cama , tipo de suite y el precio por noche,
 RESERVA: se establece la fecha de entrada y salida ,
 USUARIOS: crea, confirma o elimaina una reserva. Al confirmar la reserva recibira un email ,
 
-# entidades mongoose 
+# entidades mongoose
 
-La entidad "user" = 
+```js
+La entidad "user" =
 
-    Nombre : tipo String, requerido 
-    Apellidos : tipo String, requerido
-    Fecha de nacimiento : tipo Date, requerido // es necesario ser mayor de edad para hacer una reserva 
-    Telefono : tipo Number
-    Email : tipo String, requerido, unique, lowercase, trim, validate,  
-    Pais : tipo String // colocar selector 
-    DocumentoIdentidad : tipo DNI? 
-    Rol : tipo Bolean : usuario comun o usuario master 
+const userSchema = new Schema({
+    nombre: {
+        type : String,
+        required: true
+    },
+    apellido: {
+        type : String,
+        required: true
+    },
+    phone: {
+        type : Number,
+        required: true
+    },
+    email: {
+        type : String,
+        required: true,
+        unique: true
+    },
+    nacionalidad: {
+        type : String,
+        required: true
+    },
+    docType: {
+        type : String,
+        required : true
+    },
+    docNum: {
+        type : String,
+        required : true
+    },
+    userName: {
+        type : string,
+        required : true,
+        unique : true
+    },
+    password: {
+        type : String,
+        required : true
+    },
+    
+    isAdmin: {
+        type : Boolean,
+        default: false
+    }
+});
 
-La entidad "habitacion" = 
+//Añadir reserva en user
 
-    Nombre : tipo String 
-    Nº camas : tipo Number
-    Tipo cama : tipo String // selector 
-    Clasificacion : tipo Boolean => habitacion, suite 
-    Modelo Habitacion : tipo String // selector => individual, doble, triple
-    Descripcion : tipo Text
-    Tarifa : tipo Number 
-    Estado : tipo String // selector => libre , reservada , fuera de servcio 
+La entidad "habitacion" =
 
-La entidad "reserva" =  
+const roomSchema = new Schema({
+    roomNumber: { 
+        type: String,
+        required: true
+    },
+    roomName: {
+        type: String,
+        required: true
+    },
+    isSuite: {
+        type: Boolean,
+        default: true
+    },
+    roomType: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    comodidades: {
+        type: String,
+        required: true
+    },
+    tax: {
+        type: Number,
+        required: true
+    },
+    maxPerson: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    bedNumber: {
+        type: Number,
+        required: true
+    },
+    bedType: {
+        type: String,
+        required: true
+    },
+    image: {
+        nombre: { 
+            type : String
+            },
+        datos: {
+            type : Buffer
+            }, 
+        contentType: {
+            type : String
+            }
+    },
 
+});
 
+La entidad "reserva" = 
+
+const BookSchema = new Schema ({
+
+    bookReference: {
+        type: Number,
+        required: true
+    }
+
+});
+
+```
