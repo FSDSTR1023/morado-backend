@@ -62,6 +62,7 @@ const userSchema = new Schema({
         type : Boolean,
         default: false
     }
+    timestamps: true
 });
 
 //Añadir reserva en user
@@ -124,8 +125,8 @@ const roomSchema = new Schema({
         contentType: {
             type : String
             }
-    },
-
+    }
+    timestamps: true
 });
 
 La entidad "reserva" =
