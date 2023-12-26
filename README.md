@@ -62,6 +62,7 @@ const userSchema = new Schema({
         type : Boolean,
         default: false
     }
+}.{
     timestamps: true
 });
 
@@ -126,6 +127,7 @@ const roomSchema = new Schema({
             type : String
             }
     }
+}.{
     timestamps: true
 });
 
@@ -137,7 +139,8 @@ const BookSchema = new Schema ({
         type: Number,
         required: true
     }
-
+}.{
+    timestamps: true
 });
 
 ```
