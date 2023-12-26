@@ -15,6 +15,7 @@ USUARIOS: crea, confirma o elimaina una reserva. Al confirmar la reserva recibir
 La entidad "user" =
 
 const userSchema = new Schema({
+    
     nombre: {
         type : String,
         required: true
@@ -65,6 +66,7 @@ const userSchema = new Schema({
 La entidad "habitacion" =
 
 const roomSchema = new Schema({
+    
     roomNumber: { 
         type: String,
         required: true
