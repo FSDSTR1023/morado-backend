@@ -49,7 +49,7 @@ async function retUserById(req, res) {
 
 // ===============================    PUT    ===============================
 // *************************************************************************
-async function updatedUser(req, res) {
+async function updateUser(req, res) {
   user
     .findByIdAndUpdate(
       req.params.id,
@@ -84,6 +84,6 @@ module.exports = {
   createUser,
   retUsersAll,
   retUserById,
-  updatedUser,
+  updateUser,
   deleteUser
 };
