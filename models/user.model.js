@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { stringify } = require("querystring");
 const Schema = mongoose.Schema;
 // const bcrypt = require("bcryptjs");
 
@@ -7,7 +8,8 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  DoB:{type:Date, required: true},
+  // DoB:{type: Date, required: true},
+  DoB:{type: String, required: true},
   country: { type: String, required: true },
   docType: { type: String, required: true },
   docNum: { type: String, required: true },
