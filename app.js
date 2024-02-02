@@ -28,7 +28,7 @@ main().catch((err) => console.log(err));
 var users = require("./routes/user");
 var room = require("./routes/room");
 var bookings = require("./routes/bookings");
-// var auth = require("./routes/auth");
+//var auth = require("./routes/auth");
 
 app.use("/users", users);
 app.use("/rooms", room);
@@ -37,7 +37,7 @@ app.use("/bookings", bookings);
 
 app.get("/", (req, res) => {
   res.send("Creamos usuarios");
-});
+}); 
 
 app.listen(port, () => {
   console.log(`Aplicación escuchando en puerto: ${port}`);
