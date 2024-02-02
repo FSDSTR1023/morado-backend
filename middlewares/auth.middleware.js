@@ -1,6 +1,6 @@
 const jwt = require ("jsonwebtoken");
 
-export const authMiddleware = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
       res.status(401).send({ error: "No token provided" });
@@ -19,3 +19,5 @@ export const authMiddleware = async (req, res, next) => {
       res.status(401).send({ error: err.message });
     }
   };
+
+  module.exports = authMiddleware;
