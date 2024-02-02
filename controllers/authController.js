@@ -3,16 +3,10 @@ const User = require  ("../models/user.model.js");
 // import { createError } from "../utils/error.js";
 const jwt = require ("jsonwebtoken");
 const authMiddleware = require ("../middleware/auth.middleware.js"); 
-const cors = require ('cors')
 const users = require ("../models/user.model.js");
 
-app.use(
-  cors({
-    origin: "http://localhost:5174",
-    credentials: true,
-  })
-);
-app.use(cookieParser());
+
+// app.use(cookieParser());
 
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
@@ -48,12 +42,12 @@ app.post("/api/login", (req, res) => {
 
 app.post("/api/logout", (_req, res) => {
   res.clearCookie("token").send();
-});
+}); 
 
 app.get("/api/profile", authMiddleware, (req, res) => {
   const user = users.find((user) => user.id === req.user.id);
   res.json({ ...user, password: undefined });
-});
+}); 
 
 module.exports = {
     register,
