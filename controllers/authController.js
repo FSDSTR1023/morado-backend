@@ -4,11 +4,14 @@ const User = require  ("../models/user.model.js");
 const jwt = require ("jsonwebtoken");
 const authMiddleware = require ("../middleware/auth.middleware.js"); 
 const users = require ("../models/user.model.js");
+// const app = require ("../app.js");
+const express = require('express');
+const router = express.Router();
 
 
 // app.use(cookieParser());
 
-app.post("/api/login", (req, res) => {
+router.post("/api/login", (req, res) => {
   const { username, password } = req.body;
 
   const user = users.find(
@@ -40,16 +43,13 @@ app.post("/api/login", (req, res) => {
   );
 }); 
 
-app.post("/api/logout", (_req, res) => {
+router.post("/api/logout", (_req, res) => {
   res.clearCookie("token").send();
 }); 
 
-app.get("/api/profile", authMiddleware, (req, res) => {
+router.get("/api/profile", authMiddleware, (req, res) => {
   const user = users.find((user) => user.id === req.user.id);
   res.json({ ...user, password: undefined });
 }); 
 
-module.exports = {
-    register,
-    // login
-};
+module.exports = router;
