@@ -1,10 +1,15 @@
 const express = require("express");
 const app = express();
 const port = 5000;
-const cors = require ('cors')
+const cors = require ('cors');
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5174",
+    credentials: true,
+  })
+);
 
 require("dotenv").config();
 
@@ -28,16 +33,16 @@ main().catch((err) => console.log(err));
 var users = require("./routes/user");
 var room = require("./routes/room");
 var bookings = require("./routes/bookings");
-// var auth = require("./routes/auth");
+var auth = require("./routes/auth");
 
 app.use("/users", users);
 app.use("/rooms", room);
 app.use("/bookings", bookings);
-// app.use("/register", auth);
+app.use("/register", auth);
 
 app.get("/", (req, res) => {
   res.send("Creamos usuarios");
-});
+}); 
 
 app.listen(port, () => {
   console.log(`Aplicación escuchando en puerto: ${port}`);
