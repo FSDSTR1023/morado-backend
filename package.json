@@ -4,12 +4,14 @@
   "description": "backend-hostal ",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "cloudinary": "npm install cloudinary"
   },
   "author": "grupo-morado",
-  "license": "ISC", 
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
