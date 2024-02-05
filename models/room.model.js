@@ -14,7 +14,8 @@ const roomSchema = new Schema(
     status: { type: String, required: true },
     bedNum: { type: Number, required: true },
     bedType: { type: String, required: true },
-    photos: { type: [String] }
+    photos: { type: [String] },
+    featured: { type: Boolean, default: false }
   },
   {
     timestamps: true,

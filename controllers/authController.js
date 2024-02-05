@@ -2,7 +2,7 @@ const User = require  ("../models/user.model.js");
 // const bcrypt = require ("bcryptjs");
 // import { createError } from "../utils/error.js";
 const jwt = require ("jsonwebtoken");
-const authMiddleware = require ("../middleware/auth.middleware.js"); 
+const authMiddleware = require ("../middlewares/auth.middleware.js"); 
 const cors = require ('cors')
 const users = require ("../models/user.model.js");
 
