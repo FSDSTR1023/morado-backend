@@ -10,10 +10,10 @@ router.get('/:id', userController.retUserById )
 router.put('/:id', userController.updateUser )
 router.delete("/:id", userController.deleteUser)
 
-// login route
+// login route authController
 router.post('/login', loginUser)
 
-//signup route
+//signup route authController
 router.post('/signup', signupUser)
 
 module.exports = router
