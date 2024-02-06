@@ -17,6 +17,14 @@ async function createUser(req, res) {
     });
 }
 
+async function login (req, res) {
+ const { username, password } = req.body;
+  
+  
+
+}
+
+
 // ===============================    GET     ==============================
 // All users _______________________________________________________________
 async function retUsersAll(req, res) {
