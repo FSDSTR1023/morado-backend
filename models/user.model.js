@@ -48,7 +48,7 @@ UserSchema.methods.comparePassword = function (pwd) {
 };
 
 UserSchema.methods.generateJWT = function () {
-  console.log('this', this)
+  // console.log('this', this)
   const today = new Date();
   const expirationDate = new Date();
 
@@ -56,9 +56,11 @@ UserSchema.methods.generateJWT = function () {
 
   let payload = {
     id: this._id,
+    email: this.email,
+    username: this.username,
   };
   // method from the json-web-token library (who is in charge to generate the JWT)
-  console.log('secret', process.env.JWT_SECRET)
+  // console.log('secret', process.env.JWT_SECRET)
   return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: parseInt(expirationDate.getTime() / 1000, 10),
   });
