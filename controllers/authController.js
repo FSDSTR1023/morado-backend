@@ -2,33 +2,23 @@ const User = require  ("../models/user.model.js")
 
 //login user
 const loginUser = async (req, res) => {
-  const {email, pwd} = req.body
+  const {email, pwd } = req.body
 
-  console.log(email, pwd)
   try{
     const exists = await User.findOne({email})
-    console.log(exists, '**************')
     if (!exists){
-      console.log('usuario no encontrado')
       return res.status(404).json({msg: 'usuario no encontrado, por favor registrate'})
     }
-    console.log('a')
     if (!exists.comparePassword(pwd)) {
-      console.log('invalid password')
-      return res.status(400).json({ error: { password: 'Invalid Password' } });
+      return res.status(400).json({ error: { pwd: 'Invalid Password' } });
     }
-    console.log('b')
       return res.status(200).json({token: exists.generateJWT()})
 
   } catch (error){
 
       return res.status(500).json(error)
   }
-
-
-  // return res.json({msg: 'login user'})
 }
-
 
 //signup user
 const signupUser = async (req, res) => {
@@ -40,9 +30,7 @@ const signupUser = async (req, res) => {
   } catch (error){
     return res.status(400).json({error: error.message})
   }
-
 }
-
 
 module.exports = {
   loginUser,
