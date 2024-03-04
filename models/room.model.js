@@ -5,7 +5,7 @@ const roomSchema = new Schema(
   {
     roomNum: { type: Number, required: true },
     title: { type: String, required: true },
-    isSuite: { type: Boolean, default: false },
+    // isSuite: { type: Boolean, default: false },
     roomType: { type: String, required: true },
     desc: { type: String, required: true },
     amenities: { type: [String], required: true },

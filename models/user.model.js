@@ -58,6 +58,7 @@ UserSchema.methods.generateJWT = function () {
     id: this._id,
     email: this.email,
     username: this.username,
+    isAdmin: this.isAdmin,
   };
   // method from the json-web-token library (who is in charge to generate the JWT)
   // console.log('secret', process.env.JWT_SECRET)

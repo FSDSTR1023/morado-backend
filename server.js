@@ -15,7 +15,8 @@ const port = process.env.PORT || 3000;
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 // Ruta de carga de imágenes
-app.post('/upload', upload.single('image'), async (req, res) => {
+// app.post('/upload', upload.single('image'), async (req, res) => {
+    app.post('/upload', upload.array('image'), async (req, res) => {
 try {
  // Cargar imagen a Cloudinary
 const result = await cloudinary.uploader.upload_stream({
