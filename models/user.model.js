@@ -10,7 +10,6 @@ const UserSchema = new Schema({
   lastName: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  // DoB:{type: Date, required: true},
   DoB:{type: String, required: true},
   country: { type: String, required: true },
   docType: { type: String, required: true },
@@ -22,8 +21,6 @@ const UserSchema = new Schema({
   timestamps:true
 });
 
-//metodo statico de signup
-
 UserSchema.statics.signup = async function (nameu, lastName, phone, email, DoB, country, docType, docNum, username, isAdmin, pwd) {
 
   const exists = await this.findOne({email})
@@ -34,7 +31,6 @@ UserSchema.statics.signup = async function (nameu, lastName, phone, email, DoB, 
 
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(pwd, salt)
-
   const user = await this.create({nameu, lastName, phone, email, DoB, country, docType, docNum, username, isAdmin, pwd:hash})
 
   return user
@@ -42,13 +38,10 @@ UserSchema.statics.signup = async function (nameu, lastName, phone, email, DoB, 
 }
 
 UserSchema.methods.comparePassword = function (pwd) {
-  
-  // console.log('pwd', pwd)
   return bcrypt.compareSync(pwd, this.pwd);
 };
 
 UserSchema.methods.generateJWT = function () {
-  // console.log('this', this)
   const today = new Date();
   const expirationDate = new Date();
 
@@ -60,8 +53,6 @@ UserSchema.methods.generateJWT = function () {
     username: this.username,
     isAdmin: this.isAdmin,
   };
-  // method from the json-web-token library (who is in charge to generate the JWT)
-  // console.log('secret', process.env.JWT_SECRET)
   return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: parseInt(expirationDate.getTime() / 1000, 10),
   });
