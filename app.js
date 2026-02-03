@@ -72,9 +72,9 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Aplicación escuchando en puerto: ${port}`);
+  console.log(`Aplicación escuchando en puerto= ${port}`);
 });
 
 server.listen(portIo, () => {
-  console.log(`WEB Socket escuchando en: ${portIo}`);
+  console.log(`WEB Socket escuchando en= ${portIo}`);
 });
