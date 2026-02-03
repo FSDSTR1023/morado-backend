@@ -1,50 +1,47 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const portIo = 4000;
 const cors = require('cors');
-
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-    },
-});
+require('dotenv').config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
-require('dotenv').config();
+const io = new Server(server, {
+  cors: {
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST"]
+  },
+});
 
 let connectedUsers = 0;
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
   connectedUsers++;
   io.emit("userConnection", { message: "Usuario se acaba de conectar", count: connectedUsers });
 
   socket.on("disconnect", () => {
-      console.log("user disconnected");
-      connectedUsers--;
-      io.emit("userConnection", { message: "Usuario se acaba de desconectar", count: connectedUsers });
+    connectedUsers--;
+    io.emit("userConnection", { message: "Usuario se acaba de desconectar", count: connectedUsers });
   });
 
   socket.on("message", (msg) => {
-      console.log(msg);
-      io.emit("message", msg);
+    io.emit("message", msg);
   });
 
   socket.on("userConnection", (msg) => {
-      console.log(msg);
-      io.emit("userConnection", msg);
+    io.emit("userConnection", msg);
   });
 });
 
-
-// SERVIDOR ===================================================================================================
 const mongoose = require('mongoose');
 const mongoDB =
   'mongodb+srv://' +
@@ -56,21 +53,19 @@ const mongoDB =
   '/' +
   process.env.DB_NAME +
   '?retryWrites=true&w=majority';
+
 async function main() {
   await mongoose.connect(mongoDB);
 }
 main().catch((err) => console.log(err));
 
-
 var users = require('./routes/user');
 var room = require('./routes/room');
 var bookings = require('./routes/bookings');
-//var auth = require("./routes/auth");
 
 app.use('/users', users);
 app.use('/rooms', room);
 app.use('/bookings', bookings);
-// app.use("/register", auth);
 
 app.get('/', (req, res) => {
   res.send('Creamos usuarios');
