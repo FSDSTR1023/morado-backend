@@ -21,8 +21,13 @@ cloudinary.config({
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:5173"
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
@@ -30,7 +35,7 @@ app.use(express.json());
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"]
   }
 });
@@ -50,7 +55,7 @@ io.on("connection", (socket) => {
   socket.on("userConnection", (msg) => io.emit("userConnection", msg));
 });
 
-const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const mongoURI= `${process.env.MONGO_URI}`
 
 mongoose.connect(mongoURI)
   .then(() => console.log("Conectado a MongoDB Atlas"))
