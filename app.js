@@ -11,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 
 const PORT_API = process.env.PORT || 5000;
-
+// CLOUDINARY
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
