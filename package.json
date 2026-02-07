@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "backend-hostal ",
   "main": "app.js",
-  "scripts": {
-    "dev": "nodemon app.js"
-  },
+"scripts": {
+  "dev": "nodemon app.js",
+  "start": "node app.js"
+},
   "author": "grupo-morado",
   "license": "ISC",
   "dependencies": {
