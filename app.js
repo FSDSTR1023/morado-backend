@@ -22,8 +22,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "http://localhost:5173"
+  process.env.FRONTEND_URL
 ];
 
 app.use(cors({
@@ -55,11 +54,20 @@ io.on("connection", (socket) => {
   socket.on("userConnection", (msg) => io.emit("userConnection", msg));
 });
 
-const mongoURI= `${process.env.MONGO_URI}`
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB Atlas conectado correctamente");
+  })
+  .catch((err) => {
+    console.error("Error conectando a MongoDB Atlas:", err.message);
+  });
 
-mongoose.connect(mongoURI)
-  .then(() => console.log("Conectado a MongoDB Atlas"))
-  .catch(err => console.error("Error conectando a MongoDB:", err));
+process.on("SIGINT", async () => {
+  await mongoose.connection.close();
+  console.log("🔌 Conexión a MongoDB cerrada");
+  process.exit(0);
+});
 
 const usersRouter = require('./routes/user');
 const roomsRouter = require('./routes/room');
@@ -95,4 +103,10 @@ app.get('/', (req, res) => {
 
 server.listen(PORT_API, () => {
   console.log(`Servidor API + Socket.io escuchando en puerto ${PORT_API}`);
+});
+
+process.on('SIGINT', async () => {
+  await mongoose.connection.close();
+  console.log("Conexión cerrada al terminar el proceso");
+  process.exit(0);
 });
