@@ -12,7 +12,7 @@ async function createUser(req, res) {
       res.status(200).json(userDoc);
     })
     .catch((err) => {
-      console.log(`La creacion de un nuevo usuario ha fallado, intentalo de nuevo 😞 ${err}`);
+      console.log(`La creacion de un nuevo usuario ha fallado, intentalo de nuevo ${err}`);
       res.status(400).json(err);
     });
 }
